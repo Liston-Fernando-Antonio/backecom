@@ -16,6 +16,7 @@ class ProductImagesSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
 
+    ratings = serializers.DecimalField(source='rating', max_digits=3, decimal_places=2, read_only=True)
     images = ProductImagesSerializer(many=True, read_only=True)
     reviews = serializers.SerializerMethodField(method_name='get_reviews', read_only=True)
 

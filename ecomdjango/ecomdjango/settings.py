@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'account.apps.AccountConfig',
     'order.apps.OrderConfig',
+    'dataexploitation.apps.DataexploitationConfig',
 ]
 
 MIDDLEWARE = [

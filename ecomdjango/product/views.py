@@ -98,7 +98,7 @@ def update_product(request, pk):
     product.price = request.data['price']
     product.category = request.data['category']
     product.brand = request.data['brand']
-    product.ratings = request.data['ratings']
+    product.rating = request.data['ratings']
     product.stock = request.data['stock']
 
     product.save()
@@ -148,7 +148,7 @@ def create_review(request, pk):
 
         rating = product.reviews.aggregate(avg_ratings=Avg('rating'))
 
-        product.ratings = rating['avg_ratings']
+        product.rating = rating['avg_ratings']
         product.save()
 
         return Response({ 'detail': 'Review Updated' })
@@ -163,7 +163,7 @@ def create_review(request, pk):
 
         rating = product.reviews.aggregate(avg_ratings=Avg('rating'))
 
-        product.ratings = rating['avg_ratings']
+        product.rating = rating['avg_ratings']
         product.save()
 
         return Response({ 'detail': 'Review Posted' })
@@ -189,7 +189,7 @@ def delete_review(request, pk):
         if rating['avg_ratings'] is None:
             rating['avg_ratings'] = 0
 
-        product.ratings = rating['avg_ratings']
+        product.rating = rating['avg_ratings']
         product.save()
 
         return Response({ 'detail': 'Review deleted' })
