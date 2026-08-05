@@ -15,6 +15,12 @@ class SignUpSerializer(serializers.ModelSerializer):
         }
 
 class UserSerializer(serializers.ModelSerializer):
+    role = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
        model = User
-       fields = ('first_name', 'last_name', "email", "username") 
+       fields = ('first_name', 'last_name', "email", "username", 'is_staff', 'is_superuser', 'role')
+
+    def get_role(self, obj):
+        profile = getattr(obj, 'profile', None)
+        return profile.role if profile else 'customer'
